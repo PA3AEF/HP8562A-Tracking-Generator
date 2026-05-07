@@ -80,7 +80,7 @@ Each TG module then generates its own internal LO(s) and performs mixing to reco
 ## Block diagram
 
 ```markdown
-![TG system architecture](/images/tg-system-architecture.png)
+FIle: [TG system architecture](/images/tg-system-architecture.png)
 ```
 
 ---
