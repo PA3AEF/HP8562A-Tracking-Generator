@@ -1,7 +1,7 @@
 
 ---
 
-# Tracking Generator for the HP 8562A/B Spectrum Analyzer  
+# Tracking Generator for the HP 8562A/B Spectrum Analyzer (Work in Progress)  
 **Reconstructing the Analyzer’s RF Sweep from Its Local Oscillator**  
 **Modular, analyzer‑synchronous architecture**
 
