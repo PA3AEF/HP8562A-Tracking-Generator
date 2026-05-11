@@ -54,8 +54,7 @@ The analyzer 1st LO enters the system through the **RF SA‑LO Distribution Modu
 Each TG module receives:
 
 - **LO IN:** +16 dBm nominal  
-- After on‑module pad/filter:  
-  → **+13 dBm at mixer LO pin**
+- After on‑module pad/filter:  **+13 dBm at mixer LO pin**
 
 This ensures consistent LO drive for all mixers (HMC219, HMC220, future devices).
 
@@ -67,65 +66,47 @@ This ensures consistent LO drive for all mixers (HMC219, HMC220, future devices)
 
 The HP 8562A/B uses two different mixing modes depending on frequency:
 
-- **Fundamental mixing** for the Base‑Band TG range (0–2.9 GHz)  
-- **3× harmonic mixing** for the 3 cm TG range (9.5–11.5 GHz)
+- Fundamental mixing for the Base‑Band TG range (0–2.9 GHz)  
+- 3× harmonic mixing for the 3 cm TG range (9.5–11.5 GHz)
 
-In harmonic mode, the analyzer’s internal IF is:
+In harmonic mode, the analyzer’s internal IF is:  IF_SA = 3.1 MHz
 
-**IF\_SA = 3.1 MHz**
+This changes the analyzer’s 1st‑LO equation to:  n * LO_SA = RF_SA + IF_SA
 
-This changes the analyzer’s 1st‑LO equation to:
+For the 3 cm band, n = 3, so:  3 * LO_SA = RF_SA + 3.1 MHz
 
-\[
-n \cdot LO_{SA} = RF_{SA} + IF_{SA}
-\]
+This relationship defines the exact 1st‑LO range the TG must follow.
 
-For the 3 cm band, \( n = 3 \), so:
+For the analyzer’s 3 cm RF band:  RF_SA = 9.5–11.5 GHz
 
-\[
-3 \cdot LO_{SA} = RF_{SA} + 3.1\text{ MHz}
-\]
+The corresponding analyzer 1st LO is:  LO_SA = (RF_SA + 3.1 MHz) / 3
 
-This relationship defines the **exact 1st‑LO range** the TG must follow.
+Which evaluates to:  LO_SA = 4.47–5.14 GHz
 
-For the analyzer’s 3 cm RF band:
-
-- **RF\_SA = 9.5–11.5 GHz**
-
-The corresponding analyzer 1st LO is:
-
-\[
-LO_{SA} = \frac{RF_{SA} + 3.1\text{ MHz}}{3}
-\]
-
-Which evaluates to:
-
-**LO\_SA = 4.47–5.14 GHz**
-
-This is the *actual* LO range the TG must track to remain coherent with the analyzer display.
+This is the actual LO range the TG must track to remain coherent with the analyzer display.
 
 Because the TG derives all of its internal LOs from:
 
-- the analyzer’s **1st LO**, and  
-- the analyzer’s **10 MHz reference**,  
+- the analyzer’s 1st LO  
+- the analyzer’s 10 MHz reference  
 
 every TG output is inherently phase‑coherent with the analyzer’s sweep.
 
 This harmonic‑mode relationship is the foundation for the Base‑Band and 3 cm TG modules described below.
 
+---
+
 ### Base‑Band module  
 - Uses analyzer 1st LO as **RF input**  
 - Uses MAX2870 (fixed 3.9107 GHz) as **LO input**  
-- Mixer output:  
-  `RF_TG = LO_SA – LO_TG = RF_SA`  
+- Mixer output:  RF_TG = LO_SA – LO_TG = RF_SA
 - Produces **0–2.9 GHz** TG output
 
 ### 3 cm module  
 - Uses analyzer 1st LO (4.47–5.14 GHz) as **input to doubler**  
 - Doubled LO: **8.94–10.28 GHz** → HMC220 LO port  
 - ADF4351 generates **IF_TG = 0.56–1.23 GHz**  
-- Mixer output:  
-  `RF_TG = LO_2 – IF_TG = RF_SA`  
+- Mixer output:  RF_TG = LO_2 – IF_TG = RF_SA
 - Produces **9.5–11.5 GHz** TG output
 
 ### 6 cm module (future)  
@@ -146,9 +127,7 @@ This harmonic‑mode relationship is the foundation for the Base‑Band and 3 
 
 ## Block diagram
 
-```markdown
 ![LO architecture](/images/lo-architecture.png)
-```
 
 ---
 

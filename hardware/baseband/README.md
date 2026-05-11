@@ -45,7 +45,9 @@ With:
 - LO_SA = RF_SA + 3.1 MHz  
 - LO_TG = 3.9107 GHz (after gain stage to 13 dBm)
 
-The TG output becomes: RF_TG = RF_SA
+The TG output becomes:
+
+RF_TG = RF_SA
 
 This guarantees that the TG output tracks the analyzer’s displayed frequency exactly.
 
@@ -79,7 +81,7 @@ This guarantees that the TG output tracks the analyzer’s displayed frequency e
 - Removes mixer images and LO feedthrough  
 - Ensures clean 0–2.9 GHz output
 
-### RF output pad
+### RF gain stage + output pad
 - Provides ~0 dBm output  
 - Maintains linearity across the sweep  
 - Ensures stable 50 Ω output at the SMA connector
@@ -89,7 +91,7 @@ This guarantees that the TG output tracks the analyzer’s displayed frequency e
 ## Performance targets
 
 ### Frequency performance
-- Output band: 0–2.9 GHz
+- Output band: 0–2.9 GHz  
 - Must track analyzer sweep exactly  
 - Fast settling to follow analyzer sweep speed
 
