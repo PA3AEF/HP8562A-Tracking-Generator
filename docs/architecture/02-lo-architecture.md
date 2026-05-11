@@ -1,6 +1,3 @@
-
----
-
 # LO Architecture  
 **Sources:** Analyzer 1st LO, Analyzer 10 MHz reference  
 **Internal LOs:** MAX2870 (Base‑Band), ADF4351 (3 cm), future 6 cm / 15 mm  
@@ -64,7 +61,57 @@ This ensures consistent LO drive for all mixers (HMC219, HMC220, future devices)
 
 ---
 
-## LO usage per module
+# Harmonic‑Mode Coherence
+
+### Harmonic‑mode coherence between analyzer and TG
+
+The HP 8562A/B uses two different mixing modes depending on frequency:
+
+- **Fundamental mixing** for the Base‑Band TG range (0–2.9 GHz)  
+- **3× harmonic mixing** for the 3 cm TG range (9.5–11.5 GHz)
+
+In harmonic mode, the analyzer’s internal IF is:
+
+**IF\_SA = 3.1 MHz**
+
+This changes the analyzer’s 1st‑LO equation to:
+
+\[
+n \cdot LO_{SA} = RF_{SA} + IF_{SA}
+\]
+
+For the 3 cm band, \( n = 3 \), so:
+
+\[
+3 \cdot LO_{SA} = RF_{SA} + 3.1\text{ MHz}
+\]
+
+This relationship defines the **exact 1st‑LO range** the TG must follow.
+
+For the analyzer’s 3 cm RF band:
+
+- **RF\_SA = 9.5–11.5 GHz**
+
+The corresponding analyzer 1st LO is:
+
+\[
+LO_{SA} = \frac{RF_{SA} + 3.1\text{ MHz}}{3}
+\]
+
+Which evaluates to:
+
+**LO\_SA = 4.47–5.14 GHz**
+
+This is the *actual* LO range the TG must track to remain coherent with the analyzer display.
+
+Because the TG derives all of its internal LOs from:
+
+- the analyzer’s **1st LO**, and  
+- the analyzer’s **10 MHz reference**,  
+
+every TG output is inherently phase‑coherent with the analyzer’s sweep.
+
+This harmonic‑mode relationship is the foundation for the Base‑Band and 3 cm TG modules described below.
 
 ### Base‑Band module  
 - Uses analyzer 1st LO as **RF input**  
@@ -74,7 +121,7 @@ This ensures consistent LO drive for all mixers (HMC219, HMC220, future devices)
 - Produces **0–2.9 GHz** TG output
 
 ### 3 cm module  
-- Uses analyzer 1st LO (fundamental) as **input to doubler**  
+- Uses analyzer 1st LO (4.47–5.14 GHz) as **input to doubler**  
 - Doubled LO: **8.94–10.28 GHz** → HMC220 LO port  
 - ADF4351 generates **IF_TG = 0.56–1.23 GHz**  
 - Mixer output:  
@@ -139,7 +186,6 @@ Levels vary slightly per module but remain within mixer LO drive requirements.
 
 - LO distribution traces are short and well‑shielded  
 - High isolation between LO paths and TG RF outputs  
-- Proper via fencing around mixers and multipliers  
 - Maintain thermal margin for LO amplifiers  
 - Consistent grounding across all TG modules  
 

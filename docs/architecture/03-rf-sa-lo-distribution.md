@@ -50,9 +50,7 @@ Each TG module receives:
 
 ## Block diagram
 
-```markdown
 ![SA LO distribution architecture](/images/sa-lo-distribution.png)
-```
 
 ---
 
