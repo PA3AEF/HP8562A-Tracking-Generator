@@ -67,11 +67,11 @@ This guarantees that the TG output tracks the analyzer’s displayed frequency e
 
 ### LO gain stage (to 13 dBm)
 - Boosts MAX2870 output to the required mixer LO level  
-- Ensures stable conversion gain  
+- Ensures stable convrsion gain  
 - Maintains low added phase noise  
 - Provides clean 50 Ω drive to the mixer LO port
 
-### Fundamental mixer
+### HMC219 Fundamental mixer
 - RF port: analyzer 1st LO  
 - LO port: LO_TG at 13 dBm  
 - IF/RF output: 0–2.9 GHz  

@@ -1,6 +1,3 @@
-
----
-
 # Tracking Generator System Architecture  
 **Modules:** LO Distribution, Base‑Band, 3 cm, 6 cm (future), 15 mm (future)  
 **Coherence Sources:** Analyzer 1st LO, Analyzer 10 MHz reference  
@@ -158,6 +155,3 @@ The architecture is designed to scale to:
 - Optional digital predistortion for flatness correction
 
 The analyzer’s 1st LO and 10 MHz reference remain the **single point of coherence** for the entire TG system.
-
----
-

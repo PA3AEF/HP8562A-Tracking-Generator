@@ -1,31 +1,28 @@
-
----
-
 # 3 cm Tracking Generator Module  
 **RF Output:** 9.5–11.5 GHz (2 GHz span)  
-**Harmonic Mode:** n = 3  
+**Harmonic Mode:** n = 2  
 **Mixer Core:** HMC220  
-**TG IF LO:** ADF4351 (0.56–1.23 GHz)  
-**SA LO Path:** Doubled analyzer LO (8.94–10.28 GHz)
+**TG IF LO:** ADF4351 (fixed 310.7 MHz)  
+**SA LO Path:** Doubled analyzer LO (9.81–11.81 GHz)
 
 ---
 
 ## Overview
 
 The 3 cm module generates a tracking‑synchronous RF output in the 9.5–11.5 GHz range.  
-It operates in the analyzer’s 3× harmonic mixing mode and derives all timing from:
+It operates in the analyzer’s **2× harmonic mixing mode** and derives all timing from:
 
-- `V_sweep`  
-- Analyzer `LO_SA` (fundamental)  
-- 10 MHz reference
+- **V_sweep**  
+- **Analyzer LO_SA** (fundamental synthesizer output)  
+- **10 MHz reference**
 
 The module uses:
 
 - A **doubled analyzer LO** as the high‑frequency LO for the HMC220  
-- An **ADF4351** as the low‑frequency IF LO  
+- A **fixed‑frequency ADF4351** at 310.7 MHz as the IF LO  
 - An HMC220 mixer to produce the final RF output via the difference product
 
-This module forms the **primary X‑band TG path** in the system.
+This module forms the primary **X‑band TG path** in the system.
 
 ---
 
@@ -33,32 +30,45 @@ This module forms the **primary X‑band TG path** in the system.
 
 ### Analyzer‑derived quantities  
 `RF_SA = 2 * V_sweep`  
-`IF_1 = 3.9107 GHz`
+`IF_SA = 310.7 MHz`  
+`n = 2`
 
-### Analyzer LO (fundamental)  
-`LO_SA = (RF_SA + IF_1) / 3`
+### Analyzer LO (fundamental synthesizer output)  
+Harmonic‑mode relation:  
+`IF_SA = | 2 * LO_SA – RF_SA |`
+
+Analyzer uses the **high‑side** solution:  
+`LO_SA = (RF_SA + 310.7 MHz) / 2`
+
+For RF_SA = 9.5–11.5 GHz:  
+`LO_SA = 4.905–5.905 GHz`
+
+This is the **actual analyzer LO** delivered to the TG distribution board.
+
+---
 
 ### Doubled LO for HMC220 LO port  
-`LO_2 = 2 * LO_SA`  
-→ `8.94–10.28 GHz`
+`LO_2 = 2 * LO_SA`  → `9.8107–11.8107 GHz`
 
 This is the **high‑frequency LO** applied to the HMC220 LO port.
 
+---
+
 ### TG IF LO (ADF4351)  
 Mixer uses:  
-`RF_TG = LO_2 - IF_TG = RF_SA`
+`RF_TG = LO_2 – IF_TG = RF_SA`
 
-Thus:  
-`IF_TG = (2 * IF_1 - RF_SA) / 3`  
-→ `0.56–1.23 GHz`
+Since `LO_2 = RF_SA + 310.7 MHz`,  
+we require:  
+`IF_TG = 310.7 MHz` (constant)
 
-This is the **ADF4351 output frequency**.
+Thus the ADF4351 runs at a **fixed 310.7 MHz**, simplifying control and calibration.
 
 ---
 
 ## Block diagram
 
-```markdown
+```
 ![3cm TG architecture](/images/3cm.png)
 ```
 
@@ -66,15 +76,14 @@ This is the **ADF4351 output frequency**.
 
 ## Power budget (nominal)
 
-| Stage              | Frequency          | Level    |
-|--------------------|-------------------|---------:|
-| SA LO input        | 4.47–5.14 GHz     | ~0 dBm   |
-| Doubler output     | 8.94–10.28 GHz    | –6 dBm   |
-| LO amplifier       | 8.94–10.28 GHz    | +7 dBm   |
-| ADF4351 IF (IF_TG) | 0.56–1.23 GHz     | 0 dBm    |
-| Mixer RF out       | 9.5–11.5 GHz      | –8 dBm   |
-| RF amplifier       | 9.5–11.5 GHz      | +7 dBm   |
-| Output pad / EQ    | 9.5–11.5 GHz      | 0 dBm    |
+| Stage                    | Frequency            | Level    |
+|--------------------------|---------------------:|---------:|
+| SA LO input              | 4.905–5.905 GHz      | 16 dBm   |
+| Doubler output (HMC204)  | 9.81–11.81 GHz       | –2 dBm   |
+| LO amplifier + Pad       | 9.81–11.81 GHz       | +13 dBm  |
+| ADF4351 IF (IF_TG)       | 310.7 MHz            | +2 dBm   |
+| Mixer RF out             | 9.5–11.5 GHz         | ~5 dBm   |
+| Output pad / EQ          | 9.5–11.5 GHz         | 0 dBm    |
 
 Levels are nominal and may be trimmed with pads and EQ for flatness over the 2 GHz span.
 
@@ -89,8 +98,7 @@ Levels are nominal and may be trimmed with pads and EQ for flatness over the 2�
 
 ### MCU responsibilities  
 - Compute `RF_SA = 2 * V_sweep`  
-- Compute `IF_TG = (2 * IF_1 - RF_SA) / 3`  
-- Program ADF4351 via SPI  
+- Program ADF4351 to **fixed 310.7 MHz**  
 - Manage LO enable/mute  
 - Provide calibration hooks
 
@@ -106,7 +114,8 @@ Levels are nominal and may be trimmed with pads and EQ for flatness over the 2�
 - Amplitude flatness corrected via output pad/EQ  
 - `LO_2` level set by fixed‑gain amplifier  
 - ADF4351 spur performance acceptable due to low IF offset  
-- Mixer conversion loss measured per module and stored in calibration table
+- Mixer conversion loss measured per module and stored in calibration table  
+- No IF sweep required (fixed 310.7 MHz simplifies calibration)
 
 ---
 
@@ -116,7 +125,3 @@ Levels are nominal and may be trimmed with pads and EQ for flatness over the 2�
 - Maintain isolation between `LO_2` and RF output  
 - ADF4351 IF routing requires clean 50 Ω but is not microwave‑critical  
 - Fine‑tune pads for correct levels at `LO_2`, `IF_TG`, and `RF_TG`  
-- Use X‑band‑appropriate substrate and via fencing around the mixer  
-
----
-

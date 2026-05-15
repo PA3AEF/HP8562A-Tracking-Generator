@@ -1,159 +1,129 @@
 # LO Architecture  
-**Sources:** Analyzer 1st LO, Analyzer 10 MHz reference  
-**Internal LOs:** MAX2870 (Base‑Band), ADF4351 (3 cm), future 6 cm / 15 mm  
-**Distribution:** Central RF SA‑LO Distribution board  
-**Modes:** Fundamental mixing (Base‑Band), 3× harmonic mixing (3 cm), future bands
+**Sources:** Analyzer 1st LO, Analyzer 10 MHz reference  
+**Internal LOs:** MAX2870 (Base‑Band), ADF4351 (3 cm), future 6 cm / 15 mm  
+**Distribution:** Central RF SA‑LO Distribution board  
+**Modes:** Fundamental mixing (Base‑Band), 2× harmonic mixing (3 cm), future bands
 
 ---
 
 ## Overview
 
-The Tracking Generator system derives all timing and frequency coherence from the spectrum analyzer’s internal LO system.  
+The Tracking Generator system derives all timing and frequency coherence from the spectrum analyzer’s internal LO system.  
 Two analyzer signals form the foundation:
 
-- 1st LO (swept, ~3.0–6.8 GHz from the internal synthesizer)  
-- 10 MHz reference (system clock)
+- 1st LO (swept, ~3.0–6.8 GHz synthesizer output)  
+- 10 MHz reference (system clock)
 
 The TG system uses these to generate:
 
-- Base‑Band LO (fixed 3.9107 GHz)  
-- 3 cm IF LO (ADF4351, 0.56–1.23 GHz)  
-- 3 cm high‑frequency LO (doubled analyzer LO)  
-- Future 6 cm and 15 mm LOs
+- Base‑Band LO (fixed 3.9107 GHz)  
+- 3 cm IF LO (ADF4351, fixed 310.7 MHz)  
+- 3 cm high‑frequency LO (doubled analyzer LO)  
+- Future 6 cm and 15 mm LOs
 
-All TG modules remain phase‑coherent with the analyzer because every LO path ultimately derives from the analyzer’s 1st LO and 10 MHz reference.
+All TG modules remain phase‑coherent with the analyzer because every LO path ultimately derives from the analyzer’s 1st LO and 10 MHz reference.
 
 ---
 
 ## LO sources
 
-### Analyzer 1st LO  
-- Synthesizer range: ~3.0–6.8 GHz  
-- Effective LO range used by TG: 4.47–5.14 GHz (3 cm band)  
-- Level: ~+16.5 dBm  
+### Analyzer 1st LO  
+- Synthesizer range: 3.0–6.8 GHz  
+- Delivered to TG as the fundamental LO_SA, used by all TG modules  
+- **Effective LO_SA range depends on analyzer band and harmonic mode:**  
+  - Base‑Band (0–2.9 GHz): harmonic 1, IF = 3.9107 GHz  
+  - Mid‑band (2.75–6.46 GHz): harmonic 1, IF = 310.7 MHz  
+  - 3 cm (5.86–13 GHz): harmonic 2, IF = 310.7 MHz → LO_SA = 4.905–5.905 GHz  
+  - 6 cm (12.4–19.7 GHz): harmonic 3, IF = 310.7 MHz (future)  
+  - 15 mm (19.1–26 GHz): harmonic 4, IF = 310.7 MHz (future)  
+- Level: ~+16.5 dBm  
 - Sweep‑synchronous  
-- Defines the TG output frequency for all modules
-
-### Analyzer 10 MHz reference  
-- Used by:  
-  - MAX2870 (Base‑Band)  
-  - ADF4351 (3 cm)  
-  - Future PLLs  
-- Ensures long‑term frequency stability and coherence
+- Defines the TG output frequency for all modules  
+- For detailed internal LO generation, see **Analyzer LO Internals (3 cm Band)**
 
 ---
 
-## LO distribution
+## LO distribution
 
-The analyzer 1st LO enters the system through the RF SA‑LO Distribution Module, which performs:
+The analyzer 1st LO enters the system through the RF SA‑LO Distribution Module, which performs:
 
-- Input isolation  
-- Broadband amplification  
-- Signal splitting (Wilkinson, relays, or MMIC)  
-- Per‑branch level trimming
+- Input isolation  
+- Broadband amplification  
+- Signal splitting (Wilkinson, relays, or MMIC)  
+- Per‑branch level trimming
 
-Each TG module receives:
+Each TG module receives:
 
-- LO IN: +16 dBm nominal  
-- After on‑module pad/filter: +13 dBm at mixer LO pin
+- LO IN: +16 dBm nominal  
+- After on‑module pad/filter: +13 dBm at mixer LO pin
 
-This ensures consistent LO drive for all mixers (HMC219, HMC220, future devices).
-
----
-
-# How the analyzer generates LO_SA in the 3 cm band
-
-The HP 8562A/B uses a two‑step LO scheme with harmonic generation for the higher bands.  
-The relevant internal frequencies from the block diagram are:
-
-- First IF: IF1 = 3.910 GHz  
-- First LO (effective): LO1 = 3 × LO_synth (×6 then ÷2)  
-- Final IF path (down to 3.1 MHz) is handled by later stages
-
-For the first conversion, the analyzer uses:
-
-IF1 = LO1 – RF_SA
-
-Rearranged:
-
-LO1 = RF_SA + IF1
-
-With IF1 = 3.910 GHz:
-
-LO1 = RF_SA + 3.910 GHz
-
-The analyzer generates LO1 as the 3rd harmonic of the synthesizer output:
-
-LO1 = 3 × LO_synth
-
-So:
-
-3 × LO_synth = RF_SA + 3.910 GHz
-
-Therefore:
-
-LO_synth = (RF_SA + 3.910 GHz) / 3
-
-For the 3 cm RF band used by the TG:
-
-RF_SA = 9.5–11.5 GHz
-
-This gives:
-
-LO_synth_min = (9.5 GHz + 3.910 GHz) / 3 = 13.41 GHz / 3 ≈ 4.47 GHz  
-LO_synth_max = (11.5 GHz + 3.910 GHz) / 3 = 15.41 GHz / 3 ≈ 5.14 GHz
-
-So the analyzer’s synthesizer output (the LO we tap for the TG) runs from:
-
-LO_SA = 4.47–5.14 GHz
-
-This is the actual 1st‑LO range the TG must track in the 3 cm band.
-
-Because the TG derives all of its internal LOs from:
-
-- the analyzer’s 1st LO (LO_SA = 4.47–5.14 GHz in the 3 cm band)  
-- the analyzer’s 10 MHz reference  
-
-every TG output is inherently phase‑coherent with the analyzer’s sweep.
+This ensures consistent LO drive for all mixers (HMC219, HMC220, future devices).
 
 ---
 
-# Harmonic‑mode coherence between analyzer and TG
+# How the analyzer generates LO_SA in the 3 cm band
 
-The HP 8562A/B uses two different mixing modes depending on frequency:
+The HP 8562A/B uses **harmonic mixing mode n = 2** with a fixed IF of 310.7 MHz for the 5.86–13 GHz band.  
+The internal first‑conversion relationship is:
 
-- Fundamental mixing for the Base‑Band TG range (0–2.9 GHz)  
-- 3× harmonic mixing (via the ×3 LO chain) for the 3 cm TG range (9.5–11.5 GHz)
+`IF_SA = | 2 × LO_SA – RF_SA |`
 
-In the 3 cm band, the effective relationship between RF_SA and the synthesizer LO_SA is:
+Analyzer uses the high‑side solution:
 
-LO_SA = (RF_SA + 3.910 GHz) / 3
+`LO_SA = (RF_SA + 310.7 MHz) / 2`
 
-For RF_SA = 9.5–11.5 GHz, this yields LO_SA = 4.47–5.14 GHz, which is exactly the range used by the TG.
+For RF_SA = 9.5–11.5 GHz:
 
-The TG then:
+- LO_SA_min = 4.905 GHz  
+- LO_SA_max = 5.905 GHz  
 
-- doubles LO_SA to LO_2 = 2 × LO_SA = 8.94–10.28 GHz  
-- generates IF_TG = 0.56–1.23 GHz with the ADF4351  
-- uses RF_TG = LO_2 – IF_TG = RF_SA
+Thus the analyzer’s synthesizer output (the LO delivered to the TG distribution board) runs from:
 
-This ensures that the 3 cm TG output is coherent with the analyzer’s displayed frequency.
+**LO_SA = 4.905–5.905 GHz**
+
+Because the TG derives all of its internal LOs from:
+
+- the analyzer’s 1st LO (LO_SA = 4.905–5.905 GHz)  
+- the analyzer’s 10 MHz reference  
+
+every TG output is inherently phase‑coherent with the analyzer’s sweep.
 
 ---
 
-## LO usage per module
+# Harmonic‑mode coherence between analyzer and TG
+
+The HP 8562A/B uses two mixing modes relevant to the TG:
+
+- Fundamental mixing for the Base‑Band TG range (0–2.9 GHz)  
+- **2× harmonic mixing** for the 3 cm TG range (9.5–11.5 GHz)
+
+In the 3 cm band, the effective relationship between RF_SA and the synthesizer LO_SA is:
+
+`LO_SA = (RF_SA + 310.7 MHz) / 2`
+
+The TG then:
+
+- doubles LO_SA to `LO_2 = 2 × LO_SA = RF_SA + 310.7 MHz`  
+- uses a fixed IF_TG = 310.7 MHz  
+- produces `RF_TG = LO_2 – IF_TG = RF_SA`
+
+This ensures that the 3 cm TG output is coherent with the analyzer’s displayed frequency.
+
+---
+
+## LO usage per module
 
 ### Base‑Band module  
 - Uses analyzer 1st LO as RF input  
 - Uses MAX2870 (fixed 3.9107 GHz) as LO input  
-- Mixer output: RF_TG = LO_SA – LO_TG = RF_SA  
+- Mixer output: `RF_TG = LO_SA – LO_TG = RF_SA`  
 - Produces 0–2.9 GHz TG output
 
 ### 3 cm module  
-- Uses analyzer 1st LO (LO_SA = 4.47–5.14 GHz) as input to doubler  
-- Doubled LO: 8.94–10.28 GHz → HMC220 LO port  
-- ADF4351 generates IF_TG = 0.56–1.23 GHz  
-- Mixer output: RF_TG = LO_2 – IF_TG = RF_SA  
+- Uses analyzer 1st LO (LO_SA = 4.905–5.905 GHz) as input to doubler  
+- Doubled LO: `LO_2 = 9.8107–11.8107 GHz` → HMC220 LO port  
+- ADF4351 generates fixed `IF_TG = 310.7 MHz`  
+- Mixer output: `RF_TG = LO_2 – IF_TG = RF_SA`  
 - Produces 9.5–11.5 GHz TG output
 
 ### 6 cm module (future)  
@@ -203,7 +173,7 @@ Levels vary slightly per module but remain within mixer LO drive requirements.
 - MCU handles:  
   - LO enable/mute  
   - Lock‑detect monitoring  
-  - Sweep‑dependent IF calculations (3 cm)  
+  - Sweep‑dependent IF calculations (Base‑Band only)  
   - Band selection
 
 ---

@@ -40,13 +40,13 @@ The HP 8562A/B does **not** sweep an RF source.
 It sweeps its **first local oscillator** and mixes incoming signals down to a fixed IF.  
 To cover 1 kHz–22 GHz, it uses **automatic harmonic mixing**, where each RF band uses a different harmonic of the LO:
 
-| RF Band | Harmonic n | IF (GHz) |
-|---------|------------|----------|
-| 0–2.9 GHz | 1 | 3.9107 |
-| 2.75–6.46 GHz | 2 | 3.107 |
-| 5.86–13.0 GHz | 3 | 3.107 |
-| 12.4–19.7 GHz | 4 | 3.107 |
-| 19.1–22.0 GHz | 5 | 3.107 |
+| RF Band | Harmonic n | IF | LO Formula
+|--------:|:--------:|----------:|-----|
+| 1 kHz–2.9 GHz | 1 | 3.9107 GHz |
+| 2.75–6.46 GHz | 1 | 310.7 MHz |
+| 5.86–13.0 GHz | 2 | 310.7 Mhz | LO_SA = (RF_SA + 0.3107 GHz) / 2 |
+| 12.4–19.7 GHz | 3 | 310.7 Mhz |
+| 19.1–22.0 GHz | 4 | 310.7 Mhz|
 
 For each band, the analyzer follows: ` n * LO_SA = RF_SA + IF `
 
@@ -77,8 +77,8 @@ The TG system is composed of modular RF boards:
 - **RF SA‑LO Distribution board:** conditions and splits the analyzer’s 1st LO  
 - **Base‑Band TG module:** 0–2.9 GHz  
 - **3 cm TG module:** 9.5–11.5 GHz  
-- **6 cm TG module:** planned  
-- **15 mm TG module:** planned  
+- **6 cm TG module:** ~4.4-6.4 GHz (planned)  
+- **15 mm TG module:** ~23-25 GHz (planned)  
 
 Conceptually:
 

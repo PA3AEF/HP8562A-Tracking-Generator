@@ -1,6 +1,3 @@
-
----
-
 # Base‑Band Tracking Generator Module  
 **RF Output:** 0–2.9 GHz  
 **Mixer Core:** HMC219  
@@ -108,6 +105,3 @@ Thus the TG output equals the analyzer RF.
   - HMC219 RF/LO/IF ports  
   - Final output  
 - 3 GHz LPF ensures suppression of LO feedthrough and mixer images
-
----
-

@@ -1,6 +1,3 @@
-
----
-
 # RF SA‑LO Distribution Module  
 **Function:** Conditioning and distribution of the analyzer’s 1st LO  
 **Input:** SA 1st LO (3.9–6.8 GHz, ~+16.5 dBm)  
@@ -103,5 +100,3 @@ Designed to support:
 - Higher‑frequency LO distribution  
 - Optional per‑branch filtering  
 - Optional LO mute switching
-
----
