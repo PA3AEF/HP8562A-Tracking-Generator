@@ -121,8 +121,8 @@ Each TG module reconstructs the analyzer RF at its own band using a mixer‑base
 
 - **MCU board:** concept tested ok, developing PCB  
 - **LO Distribution:** work in prgress 
-- **Base‑Band module:** concept tested ok
-- **3 cm module:** work in progress  
+- **Base‑Band module:** proof of concept tested ok
+- **3 cm module:** proof of concept tested ok. Great to see tracking at 10 GHz with 2 GHz span!
 - **6 cm module:** planned  
 - **15 mm module:** planned  
 
