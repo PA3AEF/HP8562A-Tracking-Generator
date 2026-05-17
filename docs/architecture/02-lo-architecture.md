@@ -33,12 +33,12 @@ All TG modules remain phase‑coherent with the analyzer because every LO pa
 - **Effective LO_SA range depends on analyzer band and harmonic mode:**  
   - Base‑Band (0–2.9 GHz): harmonic 1, IF = 3.9107 GHz  
   - Mid‑band (2.75–6.46 GHz): harmonic 1, IF = 310.7 MHz 
-  -- 6 cm (4.4-6.4 GHz): harmonic 1, IF = 310.7 MHz → LO_SA = 4.710–6.710 GHz
+    - 6 cm (4.4-6.4 GHz): harmonic 1, IF = 310.7 MHz → LO_SA = 4.710–6.710 GHz
   - High-band (5.86-13 GHz): harmonic 2, IF = 310.7 MHz
-  -- 3 cm (5.86–13 GHz): harmonic 2, IF = 310.7 MHz → LO_SA = 4.905–5.905 GHz
+    - 3 cm (5.86–13 GHz): harmonic 2, IF = 310.7 MHz → LO_SA = 4.905–5.905 GHz
   - High-band-2 (12.4-19.7) GHz): harmonic 3, IF = 310.7 MHz
-  - High-band (19.1-26.5 GHz): harmonic 4, IF = 310.7 MHz
-  -- 15 mm (19.1–26 GHz): harmonic 4, IF = 310.7 MHz (future)  
+  - High-band-3 (9.5-11.5 GHz): harmonic 4, IF = 310.7 MHz
+    - 15 mm (23–25 GHz): harmonic 4, IF = 310.7 MHz → LO_SA = 5.827–6.327 GHz
 - Level: ~+16.5 dBm  
 - Sweep‑synchronous  
 - Defines the TG output frequency for all modules  
