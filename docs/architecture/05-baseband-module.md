@@ -33,8 +33,7 @@ The mixer’s difference product reconstructs the analyzer RF at base‑band.
 `RF_SA = 0–2.9 GHz`
 
 ### Analyzer 1st LO  
-`LO_SA = RF_SA + IF_1`  
-with `IF_1 = 3.9107 GHz`
+`LO_SA = RF_SA + IF_1`  with `IF_1 = 3.9107 GHz`
 
 So:  
 `LO_SA = 3.9107–6.8107 GHz`
@@ -59,7 +58,7 @@ Thus the TG output equals the analyzer RF.
 
 ## Block diagram
 
-```markdown
+```
 ![Base‑Band TG architecture](/images/baseband.png)
 ```
 
@@ -89,7 +88,7 @@ Thus the TG output equals the analyzer RF.
 ## Control architecture
 
 - MAX2870 uses the analyzer’s 10 MHz reference  
-- SPI control from Raspberry Pi Pico  
+- SPI control from Raspberry Pi Pico (MCU)
 - LO is fixed; no sweep‑dependent tuning  
 - MCU handles LO enable/mute and lock‑detect
 
@@ -97,8 +96,8 @@ Thus the TG output equals the analyzer RF.
 
 ## Mechanical / layout notes
 
-- Keep the 3.9107 GHz LO chain short and shielded  
-- Maintain isolation between the high‑level LO and the 0–2.9 GHz output  
+- 3.9107 GHz LO chain short and shielded  
+- Good isolation between high‑level LO and the 0–2.9 GHz output  
 - Fine‑tune pads for correct levels at:  
   - SA 1st LO input  
   - MAX2870 LO chain  

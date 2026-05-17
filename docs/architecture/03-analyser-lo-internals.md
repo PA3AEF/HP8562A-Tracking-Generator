@@ -15,22 +15,19 @@ The TG locks onto the analyzer’s **fundamental synthesizer output LO_SA**, whi
 
 This LO_SA range is derived from the harmonic‑mode equation:
 
-**IF_SA = | 2 × LO_SA – RF_SA |**,  
-with **IF_SA = 310.7 MHz**.
+**IF_SA = | 2 × LO_SA – RF_SA |**,  with **IF_SA = 310.7 MHz**.
 
-The analyzer uses the **high‑side** solution:
-
-**LO_SA = (RF_SA + 310.7 MHz) / 2**
+The analyzer uses the **high‑side** solution: **LO_SA = (RF_SA + 310.7 MHz) / 2**
 
 ---
 
 ## Internal signal flow
 
-1. **RF_SA (9.5–11.5 GHz)** enters the **A8 Dual Mixer**.  
+1. **RF_SA (9.5–11.5 GHz)** enters the **Dual Mixer (A8)**.  
 2. The analyzer’s **LO_synth** (4.905–5.905 GHz) is **doubled** internally to produce **2 × LO_synth = 9.81–11.81 GHz**.  
 3. The first mixer down‑converts RF_SA to the **first IF = 310.7 MHz** (harmonic mode n = 2).  
-4. The 310.7 MHz IF passes through the **A13 Second Converter**, but **bypasses its mixer** (Bands 1–4 do not use the second conversion).  
-5. The **A15 Third Converter** performs the **final conversion** from 310.7 MHz to the **final IF = 10.7 MHz**, which feeds the display chain.
+4. The 310.7 MHz IF passes through the **Second Converter (A13)**, but **bypasses its mixer** (Bands 1–4 do not use the second conversion).  
+5. The **Third Converter (A15)** performs the **final conversion** from 310.7 MHz to the **final IF = 10.7 MHz**, which feeds the display chain.
 
 So according to the HP service manual:
 
@@ -69,7 +66,7 @@ This is the LO range distributed to the TG.
 | Displayed RF band | **RF_SA** | 9.5–11.5 GHz | Analyzer 3 cm band |
 | First IF | **IF_SA** | 310.7 MHz | Fixed internal IF |
 | Synthesizer output | **LO_SA** | 4.905–5.905 GHz | TG reference |
-| Effective 1st LO | **LO1** | 9.81–11.81 GHz | 2 × LO_SA |
+| Effective 1st LO | **LO_2** | 9.81–11.81 GHz | 2 × LO_SA |
 | Final IF | **IF_display** | 10.7 MHz | Display IF |
 
 ---

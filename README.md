@@ -1,6 +1,6 @@
 # Tracking Generator for the HP 8562A/B Spectrum Analyzer  
-**Reconstructing the Analyzer’s RF Sweep from Its Local Oscillator**  
-**Modular, analyzer‑synchronous architecture**
+**Reconstructing the Analyzer’s RF Sweep from Its Local Oscillator**
+**A modular, analyzer‑synchronous architecture**
 
 ---
 
@@ -49,11 +49,7 @@ To cover 1 kHz–26 GHz, it uses **automatic harmonic mixing**, where each R
 | 12.4–19.7 GHz | 3 | 310.7 MHz | LO_SA = (RF_SA + 0.3107 GHz) / 3 |
 | 19.1–26.0 GHz | 4 | 310.7 MHz | LO_SA = (RF_SA + 0.3107 GHz) / 4 |
 
-For each band, the analyzer follows:
-
-```
-n * LO_SA = RF_SA + IF
-```
+For each band, the analyzer follows: `n * LO_SA = RF_SA + IF`
 
 Because **n changes with band**, the analyzer LO becomes **non‑linear** with respect to the displayed frequency.
 
