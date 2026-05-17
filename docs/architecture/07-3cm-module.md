@@ -107,12 +107,9 @@ Levels are nominal and must be trimmed with pads and EQ for flatness over the 2�
 ## Control architecture
 
 ### Inputs to MCU  
-- `V_sweep` (ADC)  
-- 10 MHz reference  
-- Band select
+- Band select switch
 
 ### MCU responsibilities  
-- Compute `RF_SA = 2 * V_sweep`  
 - Program ADF4351 to **fixed 310.7 MHz**  
 - Manage LO enable/mute  
 - Provide calibration hooks
@@ -137,6 +134,6 @@ Levels are nominal and must be trimmed with pads and EQ for flatness over the 2�
 ## Mechanical / layout notes
 
 - Doubler → LO amp → HMC220 LO path should be short and shielded  
-- Maintain isolation between `LO_2` and RF output  
+- Good isolation between `LO_2` and RF output  
 - ADF4351 IF routing requires clean 50 Ω but is not microwave‑critical  
 - Fine‑tune pads for correct levels at `LO_2`, `IF_TG`, and `RF_TG`  

@@ -1,5 +1,5 @@
 # 15 mm Tracking Generator Module (concept)  
-**RF Output:** 22.0–26.0 GHz (option band, includes 24.048 GHz amateur)  
+**RF Output:** 23.0–25.0 GHz (option band, includes 24.048 GHz amateur)  
 **Harmonic Mode:** n = 4  
 **Mixer Core:** mm‑wave mixer (22–26 GHz class)  
 **TG IF LO:** ADF4351 (fixed 310.7 MHz)  
@@ -9,10 +9,9 @@
 
 ## Overview
 
-The 15 mm module is a **conceptual future TG path** extending coherent tracking into the 22–26 GHz option band.  
+The 15 mm module is a **conceptual future TG path** extending coherent tracking into the 23–25 GHz option band.  
 It operates in the analyzer’s **4× harmonic mixing mode** and derives all timing from:
 
-- **V_sweep**  
 - **Analyzer LO_SA** (fundamental synthesizer output)  
 - **10 MHz reference**
 
@@ -43,12 +42,12 @@ Analyzer uses the **high‑side** solution:
 
 For RF_SA = 22.0–26.0 GHz:
 
-- `LO_SA,min = (22.0 + 0.3107) / 4 ≈ 5.5777 GHz`  
-- `LO_SA,max = (26.0 + 0.3107) / 4 ≈ 6.5777 GHz`
+- `LO_SA,min = (23.0 + 0.3107) / 4 ≈ 5.8277 GHz`  
+- `LO_SA,max = (25.0 + 0.3107) / 4 ≈ 6.3277 GHz`
 
 So the analyzer LO delivered to the TG is:
 
-- **LO_SA ≈ 5.58–6.58 GHz**
+- **LO_SA ≈ 5.82–6.32 GHz**
 
 At the 15 mm amateur allocation (24.048 GHz):
 
@@ -85,9 +84,7 @@ Thus the ADF4351 again runs at a **fixed 310.7 MHz**, same control model as 6�
 
 ## Block diagram
 
-```
 ![15mm TG architecture](/images/15mm.png)
-```
 
 ---
 
@@ -125,5 +122,5 @@ Same assumptions as before, but with updated frequency ranges:
 | RF output (SMA / waveguide launch) | 22.0–26.0 GHz           |   0 dB  |   0 dBm |
 ```
 
-**NOTE:** These are **design targets**, not commitments—real parts will move the numbers a bit.
+**NOTE:** These are **design targets**, not commitments. Real parts will move the numbers a bit.
 
