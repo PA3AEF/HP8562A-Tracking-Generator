@@ -58,9 +58,7 @@ Thus the TG output equals the analyzer RF.
 
 ## Block diagram
 
-```
 ![Base‑Band TG architecture](/images/baseband.png)
-```
 
 ---
 
