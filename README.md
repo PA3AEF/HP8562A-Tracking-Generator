@@ -151,17 +151,17 @@ Each TG module reconstructs the analyzer RF at its own band using a mixer‑base
     06-6cm-module.md
     07-3cm-module.md
     08-12mm-module.md
-/images
+/docs/architecture/images
     architecture diagrams
-/hardware
-    schematics, layouts, BOMs
+/hardware/<module>
+    schematics, layouts, BOMs, images
 /firmware
     MCU firmware (Raspberry Pi Pico)
-/analysis
-    calculations, simulations
+    overview
+    images
 /mechanical
     enclosures, front panels
-/scripts
+/usage
     calibration and measurement tools
 ```
 

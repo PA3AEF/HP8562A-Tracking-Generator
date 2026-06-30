@@ -8,7 +8,7 @@ The hardware is organized into four primary modules:
 - **Baseband Module (0–2.9 GHz)**
 - **6 cm Module (4.3–7.2 GHz)**
 - **3 cm Module (8.8–11.7 GHz)**
-- **LO Module (central PLLs + 10 MHz reference)**
+- **LO Module (Isolation and distribution of 1st LO from SA)**
 
 All PCBs are designed in KiCad and stored in separate subdirectories.
 
