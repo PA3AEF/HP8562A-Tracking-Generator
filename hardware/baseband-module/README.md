@@ -79,7 +79,7 @@ Each block is described below.
 
 
 **HFSS modeling results optimized for standard LC values:**
-![Low Pass FIlter with Fc 3 GHz](/hardware/baseband-module/lpf-3GHz.png)
+![Low Pass FIlter with Fc 3 GHz](/hardware/baseband-module/images/lpf-3GHz.png)
 
 ---
 

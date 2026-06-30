@@ -46,7 +46,7 @@ A Band Pass Filter at 310 MHz follows the ADF4351 to maintain signal purity.
 
 **HFSS modeling results optimized for standard LC values:** 
 
-![310 MHz BPF](/hardware/3cm-module/bpf-310MHz.png)
+![310 MHz BPF](/hardware/3cm-module/images/bpf-310MHz.png)
 
 ---
 

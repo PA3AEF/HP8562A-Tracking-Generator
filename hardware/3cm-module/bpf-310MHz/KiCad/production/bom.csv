@@ -1,0 +1,5 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"C1, C2",0805,2,15pF,
+"C3, C5",0805,2,68pF,
+C4,0805,1,470pF,
+"L1, L2",0805,2,22nH,
