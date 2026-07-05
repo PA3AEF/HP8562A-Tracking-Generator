@@ -68,8 +68,8 @@ Thus the ADF4351 runs at a **fixed 310.7 MHz**, simplifying control and calibr
 
 ## Block diagram
 
-```
 ![3cm TG architecture](./images/3cm-architecture.png)
+
 ```
 
 ---
@@ -81,10 +81,10 @@ Thus the ADF4351 runs at a **fixed 310.7 MHz**, simplifying control and calibr
 | **LO path**                   |                       |         |         |
 | SA LO output                  | 4.905–5.905 GHz       |   0 dB  | +16 dBm |
 | LO isolator                   | 4.905–5.905 GHz       |  –1 dB  | +15 dBm |
-| LO doubler input              | 4.905–5.905 GHz       |   0 dB  | +15 dBm |
-| LO doubler (HMC204)           | 9.81–11.81 GHz   | –18 dB  |  –3 dBm |
-| LO amplifier                  | 9.81–11.81 GHz        | +18 dB  | +15 dBm |
-| LO pad to mixer LO port       | 9.81–11.81 GHz        |  –2 dB  | +13 dBm |
+| LO Switch (PE42540)           | 4.905–5.905 GHz       |  -1 dB  | +14 dBm
+| LO doubler input              | 4.905–5.905 GHz       |   0 dB  | +14 dBm |
+| LO doubler (HMC204)           | 9.81–11.81 GHz        | –17 dB  |  –3 dBm |
+| LO amplifier                  | 9.81–11.81 GHz        | +15 dB  | +12 dBm |
 | LO at mixer LO port           | 9.81–11.81 GHz        |   0 dB  | +13 dBm |
 |                               |                       |         |         |
 | **IF path**                   |                       |         |         |
