@@ -23,9 +23,9 @@ It is designed for clarity, reproducibility, and modularity, following a clean s
 
 /firmware  
   src/  
-   • Tracking_Generator.ino 
-   • pins.h  
-   • bands.h / bands.cpp  
+   • Tracking_Generator.ino
+   • pins.h
+   • bands.h / bands.cpp
    • pll_max2870.h / pll_max2870.cpp  
    • pll_adf4351.h / pll_adf4351.cpp    
    • pll_control.h / pll_control.cpp  

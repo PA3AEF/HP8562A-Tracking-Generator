@@ -835,9 +835,9 @@
 		)
 		(uuid "487acab4-e9d1-4f7b-b32f-850d4a14afd1")
 	)
-	(text "Substrate: FR4 0.8mm"
+	(text "Substrate: FR4 0.8mm S1000H-TG155  (JLC-3)"
 		(exclude_from_sim no)
-		(at 189.23 168.91 0)
+		(at 201.93 168.91 0)
 		(effects
 			(font
 				(size 1.27 1.27)

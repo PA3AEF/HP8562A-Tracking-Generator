@@ -79,7 +79,11 @@ Each block is described below.
 
 
 **HFSS modeling results optimized for standard LC values:**
-![Low Pass FIlter with Fc 3 GHz](/hardware/baseband-module/images/lpf-3GHz.png)
+![Low Pass Filter with Fc 3 GHz](/hardware/baseband-module/images/lpf-3GHz.png)
+
+Another solution was modeled using folded stepped impedance open subs after Makki et al. 
+
+![Low Pass Filter with Fc 3 GHz on Microstrip](/hardware/baseband-module/images/lpf-3GHz-SIOS.png)
 
 ---
 
