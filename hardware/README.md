@@ -28,31 +28,37 @@ Each module directory contains:
 ## Hardware Module Overview
 
 ### **Baseband Module (0–2.9 GHz)**
-- IF chain from the HMC219 downconverter  
+- IF chain from the HMC219 downconverter
+- PLL at 3.9107 GHz  
 - 3 GHz low‑pass filter  
 - Pads, IF amplifier, SMA output  
-- Purpose: provide a clean IF signal for the 6 cm and 3 cm upconverter modules
 
-### **6 cm Module (4.3–7.2 GHz)**
+### **6 cm Module (4.4–6.4 GHz)**
 - HMC220 mixer  
 - IF and RF amplification  
 - Band‑pass filtering for 4–8 GHz  
 - Purpose: upconversion for the 6 cm tracking generator band
 
-### **3 cm Module (8.8–11.7 GHz)**
-- HMC220 mixer  
+### **3 cm Module (9.5–11.5 GHz)**
+- HMC220 mixer 
+- PLL at 310.7 MHz
+- Band-pass filter at 310 MHz 
 - High‑frequency RF amplifier (9–12 GHz)  
 - Band‑pass filtering for 8–12 GHz  
 - Purpose: upconversion for the 3 cm tracking generator band
 
-### **LO Board**
-- Three PLLs:
-  - 3.9107 GHz (baseband LO)  
-  - 4.3 GHz (6 cm LO)  
-  - 8.8 GHz (3 cm LO)  
-- LO amplifiers + SMA band‑pass filters  
-- 10 MHz reference input  
-- SPI control (Raspberry Pi or microcontroller)
+### **Control Module**
+- Raspberry Pi microcontroller
+- Control of all circuitry, indicators, etc.
+- Power provision for each band module (5-12V selectable) 
+- Prper startup-shutdown sequence for band switching
+- 10 MHz reference input buffering and distribution (SMA)
+- SPI control for PLLs 
+
+### **LO Module**
+- Isolation of 1st LO output of analyser
+- Braodband amplification of 1st LO output
+- Distribution of 1st LO to band modules 
 
 ---
 
