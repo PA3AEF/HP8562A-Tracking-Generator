@@ -44,10 +44,6 @@ The TG generates a fixed IF signal using the ADF4351: `IF_TG = 310.7 MHz
 The MCU programs the ADF4351 via SPI and maintains sweep coherence with the analyzer’s 10 MHz reference.
 A Band Pass Filter at 310 MHz follows the ADF4351 to maintain signal purity. 
 
-**HFSS modeling results optimized for standard LC values:** 
-
-![310 MHz BPF](/hardware/3cm-module/images/bpf-310MHz.png)
-
 ---
 
 ## Mixer output and TG coherence
@@ -71,6 +67,11 @@ This exactly matches the analyzer’s displayed frequency.
 - MCU‑controlled and reference‑locked  
 - Purpose: provide the IF offset needed to reconstruct RF_TG
 
+**HFSS modeling results optimized for standard LC values:** 
+
+![310 MHz BPF](/hardware/3cm-module/images/bpf-310MHz.png)
+
+
 ### HMC220 mixer
 - LO port: 9.81–11.81 GHz  
 - IF port: 310.7 MHz  
@@ -80,6 +81,12 @@ This exactly matches the analyzer’s displayed frequency.
 ### Band‑pass filter (8–12 GHz)
 - Removes LO₂ leakage, IF_TG leakage, and mixer images  
 - Ensures only the 9.5–11.5 GHz band reaches the amplifier
+
+Did not succeed yet in modeling a proper BPF so, for now a simple lowpass filter on 0.8mm FR4. 
+
+**HFSS modeling results for a stepped impedance lowpass filter:** 
+
+![12 GHz LPF stepped impedance](/hardware/3cm-module/images/lpf-12GHz-SI.png)
 
 ### RF gain stage + output pad
 - Provides ~0 dBm output  
