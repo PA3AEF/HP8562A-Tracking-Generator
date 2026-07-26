@@ -6,8 +6,8 @@ Each RF module is fully self‑contained with its own schematic, PCB if applicab
 The hardware is organized into four primary modules:
 
 - **Baseband Module (0–2.9 GHz)**
-- **6 cm Module (4.3–7.2 GHz)**
-- **3 cm Module (8.8–11.7 GHz)**
+- **6 cm Module (4.4–6.4 GHz)**
+- **3 cm Module (8.5–11.5 GHz)**
 - **LO Module (Isolation and distribution of 1st LO from SA)**
 
 All PCBs are designed in KiCad and stored in separate subdirectories.
