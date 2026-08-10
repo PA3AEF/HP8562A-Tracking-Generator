@@ -16,7 +16,6 @@ Its responsibilities:
 - Provide stable impedance and isolation  
 - Amplify the LO to compensate for splitter loss  
 - Split the LO into four well‑behaved outputs  
-- Deliver a consistent **+16 dBm** to each TG module  
 - Ensure each module can achieve **+13 dBm at the mixer LO pin**
 
 This board forms the **central LO backbone** for the entire TG system.
@@ -32,7 +31,7 @@ This board forms the **central LO backbone** for the entire TG system.
 
 ### Internal processing  
 - Isolator stabilizes return loss and protects the analyzer (a 10dB gain-block would also give enough isolation) 
-- Broadband amplifier restores headroom before splitting  
+- Broadband amplifier restores headroom before splitting (probably not necessary with CMOS siwtch such as PE42540)
 - Splitter (Wilkinson, relays or MMICs) provides isolation between TG modules  
 - Per‑branch pads flatten response and set final level
 
@@ -57,11 +56,9 @@ Each TG module receives:
 |:-------|-----------:|------:|
 | SA 1st LO | — | +16.5 dBm |
 | Isolator | –0.5 dB | +16 dBm |
-| Broadband amplifier | +10 dB | +26 dBm |
-| 4‑way split | –7 dB | +19 dBm |
-| Per‑port pad | –3 dB | **+16 dBm** |
-| TG module LO input | — | +16 dBm |
-| On‑module pad/filter | –3 dB | **+13 dBm at mixer LO pin** |
+| 4-way split (PE42540) | -1.5 dB | +14.5 dBm |
+| TG module LO input | — | +14.5 dBm |
+| On‑module pad/filter | –3 dB | **+11 dBm at mixer LO pin** |
 
 ---
 
@@ -98,6 +95,6 @@ Designed to support:
 - Additional TG modules  
 - Higher‑frequency LO distribution  
 - Optional per‑branch filtering  
-- Optional LO mute switching
+- LO mute switching thru MCU
 
 ---
