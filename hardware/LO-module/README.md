@@ -1,7 +1,7 @@
 # LO Module — External 1st LO Distribution
 
-The LO Module takes the **1st LO output from the HP 8562A/B Spectrum Analyzer** and distributes it cleanly and at controlled power levels to all TG RF bands.  
-The module provides isolation, gain compensation, RF switching, and MCU‑based band selection.
+The LO Module takes the **1st LO output from the HP 8562A/B Spectrum Analyzer** and distributes it cleanly and at controlled power levels to all TG RF modules.  
+The module provides isolation, optionally gain compensation, RF switching, and MCU‑based band selection.
 
 ---
 
@@ -35,15 +35,19 @@ The module provides isolation, gain compensation, RF switching, and MCU‑based 
 - Prevents reflections from the TG system  
 - Provides a stable load to the analyzer’s LO output
 
-### 3. Broadband Amplifier (~10 dB)
+**NOTE:** A broad amplifier can be used instead. It would give enough isolation too. 
+
+### 3. Broadband Amplifier (~10 dB) (optional)
 - Frequency range: **3.9–6.8 GHz**  
-- Purpose: compensate insertion loss of PE42540 switch  
+- Purpose: compensate insertion loss of RF switch  
 - Ensures final per‑port LO level remains at **~+16 dBm**
+
+**NOTE:** Various solutions can be used to create a 4-way switch/splitter. WIth the low-loss PE42540 it is not necesary
 
 ### 4. PE42540 4‑Way RF Switch/Splitter
 - Provides **four isolated LO outputs**  
 - MCU‑controlled switching  
-- Low insertion loss, but compensated by the broadband amp  
+- Low insertion loss  
 - Output level per port: **~+16 dBm**
 
 ### 5. SMA Outputs
@@ -52,7 +56,7 @@ The module provides isolation, gain compensation, RF switching, and MCU‑based 
 - Stable drive level for mixers
 
 ### 6. MCU Control (Raspberry Pi Pico)
-- Controls PE4250/PE42540  
+- Controls PE42540  
 - Selects active LO output path  
 - Provides band‑select logic for TG modules
 
