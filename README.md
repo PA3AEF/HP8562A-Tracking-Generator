@@ -167,13 +167,13 @@ Each TG module reconstructs the analyzer RF at its own band using a mixer‑base
 
 ---
 
-## Status
+## Status (Sep 27, 2026)
 
 - File: [example S21 3 cm lossy filter](./images/s21-3cm-lossy-filter.jpg)
 - File: [example S11 3 cm pole filter](./images/s11-3cm-pole-filter.jpg)
-- MCU board: concept tested OK, PCB in development  
-- LO Distribution: work in progress  
-- Base‑Band module: proof of concept tested OK  
+- MCU board: concept tested OK, new PCB in development to accomodate new 10 MHz distribution architecture 
+- LO Distribution: finished 
+- Base‑Band module: finished  
 - 3 cm module: proof of concept tested OK (tracking at 10 GHz with 2 GHz span)  
 - 6 cm module: architecture defined  
 - 12 mm module: conceptual design complete  
