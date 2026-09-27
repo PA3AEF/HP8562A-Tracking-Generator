@@ -1,138 +1,76 @@
 # 10 MHz Reference Fan‑Out
 
-This document explains the design choices behind the 10 MHz reference distribution amplifier used in this project. The goal is to take a single 10 MHz reference input and generate four clean, isolated, 50 ohm outputs suitable for PLLs, synthesizers, or test equipment.
+The 10 MHz reference distribution network provides a stable, low‑noise signal to multiple subsystems within the control module.  
+This revision replaces the earlier op‑amp‑based buffer with a **broadband MMIC amplifier** to achieve higher gain, better impedance control, and improved RF integrity.
 
 ---
 
-## Overview
+## Design Intent
+The goal is to replicate a single precision 10 MHz reference into several identical outputs while maintaining:
 
-The circuit consists of:
-
-- A 50 ohm terminated AC‑coupled input  
-- A shared bias node (Vref ≈ 2.5 V)  
-- Four unity‑gain OPA1604 (or alike) buffer stages  
-- AC‑coupled 50 ohm series‑terminated outputs  
-
-Each output is electrically isolated from the others and presents a proper 50 ohm source impedance.
+- Consistent amplitude and phase across all outputs  
+- True 50 Ω system compatibility  
+- Minimal additive noise and distortion  
+- Simple, robust implementation suitable for RF PCB layout  
 
 ---
 
-## Why the OPA1604 series?
+## Functional Architecture
 
-The OPA1604 is a low‑noise, wide‑bandwidth audio op‑amp that performs exceptionally well at 10 MHz in unity‑gain operation. Although designed for high‑fidelity audio, its combination of bandwidth, linearity, and low noise makes it an excellent choice for the 10 MHz reference‑signal fan‑out.
+The circuit can be viewed as **four functional blocks**:
 
-### Key reasons for choosing it:
-- **Unity‑gain bandwidth around 20 MHz**
-Provides ample margin for clean, low‑distortion 10 MHz sine‑wave buffering.
+1. **Input Conditioning**  
+   - The incoming 10 MHz reference is terminated and AC‑coupled into a broadband amplifier.  
+   - The interface maintains 50 Ω impedance to prevent reflections and loading of the source.  
+   - A small detection network monitors the presence of the reference signal and converts it into a DC logic level for indication.
 
-- **Low input noise (~4.5 nV/√Hz)**  
-Ensures the distribution amplifier does not raise the overall phase‑noise floor.
+2. **Amplification**  
+   - A single MMIC amplifier provides sufficient gain to overcome splitter losses.  
+   - The device operates linearly at 10 MHz, ensuring clean reproduction of the reference signal.  
+   - Power‑supply filtering and decoupling maintain low noise and prevent modulation of the reference.
 
-- **Excellent linearity on a single +5 V supply**
-The device remains stable and distortion‑free across the full 10 MHz swing.
+3. **Signal Distribution**  
+   - The amplifier output feeds a passive multi‑way splitter.  
+   - Each branch is impedance‑matched and AC‑coupled to its output connector.  
+   - The topology ensures isolation between outputs and preserves amplitude balance.
 
-- **Quad package**
-Four matched channels in one IC simplifies layout and ensurs consistent channel‑to‑channel behavior.
-
-- **High output drive capability**
-Easily drives a 50 ohm load through a ~50 ohm series resistor, providing proper source impedance for PLL reference inputs.
-
-### Drop‑in alternatives:
-The following quad op‑amps offer similar or improved performance and can be used as direct replacements:
-
-- OPA1644: JFET input, similar bandwidth and noise
-- OPA1654: lower noise, higher bandwidth, modern rail‑to‑rail architecture
-- OPA1679: low‑power, low‑noise, wide‑bandwidth option
-
-All three devices are suitable for 10 MHz reference fan‑out applications.
+4. **Reference‑Presence Indicator**  
+   - A detector monitors the RF level at the amplifier output and generates a logic signal when the 10 MHz reference is present.  
+   - This logic drives a **dual‑color LED** that provides immediate visual feedback:  
+     - **Red** indicates that the module is powered but no reference signal is detected.  
+     - **Green** indicates that the 10 MHz reference is active and within expected amplitude.  
+   - The indicator circuit uses a simple envelope‑detection and transistor‑switching scheme to translate the RF presence into a DC control signal.
 
 ---
 
-## AC Bandwidth
+## Operational Behavior
 
-The OPA1604 has a unity‑gain bandwidth of approximately 20 MHz.  
-In unity gain, the effective –3 dB bandwidth is roughly 10–20 MHz depending on loading.
-
-Since the reference frequency is 10 MHz, the amplifier operates well within its linear region.  
-Amplitude error and phase shift are negligible for this application.
+When power is applied, the indicator initially lights **red**, confirming that the module is energized but awaiting a valid reference.  
+As soon as the 10 MHz signal reaches nominal amplitude, the detector transitions to **green**, signaling that the reference is locked and distributed correctly.  
+If the reference disappears or drops below threshold, the circuit automatically reverts to red, providing a clear visual cue of signal loss.
 
 ---
 
-## Noise Performance
-
-The output noise is dominated by:
-
-- Op‑amp voltage noise (~4.5 nV/√Hz)  
-- Thermal noise of the 50 ohm input and output resistors (~0.9 nV/√Hz each)
-
-Combined noise density at the output is approximately:`~4.7 nV/√Hz`
-
-Integrated over a 100 kHz bandwidth:`~1.5 µV RMS`
-
-For a 1 Vpp (0.35 V RMS) reference signal, this corresponds to:`~107 dB SNR`
-
-This is far below the phase‑noise floor of typical PLLs or signal analyzers, ensuring the fan‑out stage does not degrade system performance.
+## Performance Characteristics
+- **Gain Margin:** The amplifier compensates for splitter attenuation, maintaining nominal output levels.  
+- **Isolation:** Passive resistive topology provides adequate separation between outputs for reference use.  
+- **Noise Contribution:** The MMIC adds negligible phase noise compared to the master reference.  
+- **Bandwidth:** The design remains stable and flat well beyond 10 MHz, ensuring predictable behavior.  
+- **Power Supply:** Operates from a single low‑voltage rail with standard RF decoupling practices.
 
 ---
 
-## Channel Isolation
-
-Each output buffer has:
-
-- Its own op‑amp channel  
-- A 100 ohm series resistor at the non‑inverting input  
-- A ~50 ohm series resistor at the output  
-- Independent AC‑coupling
-
-This provides excellent isolation between channels.
-
-Expected crosstalk at 10 MHz: –60 to –80 dB, which is more than enough for reference distribution.
-
----
-
-## Why AC‑Coupling and Vref Biasing?
-
-The OPA1604 cannot handle input signals near 0 V when powered from a single +5 V rail.  
-To operate linearly, the input must be biased to mid‑supply.
-
-The design uses:
-
-- AC‑coupling capacitor at the input  
-- A 2.5 V virtual ground (R5/R6/C5)  
-- All op‑amp non‑inverting inputs tied to this node
-
-This ensures:
-
-- The 10 MHz signal sits at the center of the op‑amp’s linear range  
-- No DC from the source propagates into the buffers  
-- All channels share the same stable bias point
-
----
-
-## Output Stage
-
-Each output uses:
-
-` Op‑amp OUT → AC‑coupling capacitor → ~50 ohm series → SMA`
-
-This provides:
-
-- Correct 50 ohm source impedance  
-- DC isolation  
-- Protection against load variations or reflections  
-- Clean, predictable behavior with any 50 ohm RF input
+## Implementation Notes
+- Short RF paths and continuous ground planes.  
+- Via fencing around the amplifier region for stability.  
+- Decoupling capacitors close to the device pins.  
+- Maintain symmetry in the splitter layout to ensure equal path lengths.  
+- AC‑couple all outputs to DC-protect downstream circuits.
 
 ---
 
 ## Summary
-
-The combination of:
-
-- OPA1604 quad op‑amp  
-- AC‑coupled, biased input  
-- Four unity‑gain buffers  
-- Proper 50 ohm input and output matching  
-
-results in a **low‑noise, high‑isolation, wide‑bandwidth 10 MHz reference fan‑out** suitable for demanding RF and timing applications.
+This MMIC‑based fan‑out architecture provides a clean, broadband, and impedance‑controlled distribution of the 10 MHz reference.  
+It simplifies the design compared to op‑amp buffers, improves gain margin, and ensures reliable operation across all connected modules.
 
 ---
