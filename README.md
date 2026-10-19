@@ -167,15 +167,14 @@ Each TG module reconstructs the analyzer RF at its own band using a mixer‑base
 
 ---
 
-## Status (Sep 27, 2026)
+## Status (Oct 19, 2026)
 
 Checkout the [discussion section](https://github.com/PA3AEF/HP8562A-Tracking-Generator/discussions) for updates on the first results I have. 
 
 - File: [example S21 3 cm lossy filter](./images/s21-3cm-lossy-filter.jpg)
 - File: [example S11 3 cm pole filter](./images/s11-3cm-pole-filter.jpg)
-- MCU board: 
-  - concept tested OK, new PCB in development to accomodate new 10 MHz distribution architecture
-  - firmware tested OK. Waiting for final PCB to start polish and publish
+- MCU board: finshed (I have some boards available) 
+- Firmware: finished (Base-band, 6cm and 3cm) 
 - LO Distribution: finished 
 - Base‑Band module: finished  
 - 3 cm module: proof of concept tested OK (tracking at 10 GHz with 2 GHz span)  
