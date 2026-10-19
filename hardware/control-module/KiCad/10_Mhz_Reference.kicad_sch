@@ -2179,6 +2179,33 @@
 		(color 0 0 0 0)
 		(uuid "ff8b3f13-44e3-42dc-9df6-0a520c8686cb")
 	)
+	(bus_entry
+		(at 119.38 91.44)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2623e55f-8748-447b-81e3-69953358ac02")
+	)
+	(bus_entry
+		(at 123.19 60.96)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72734d5d-e66b-4f4d-8600-aba57aa99425")
+	)
+	(bus_entry
+		(at 124.46 59.69)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "940a155f-b60a-401e-8c07-611e7464d6a9")
+	)
 	(wire
 		(pts
 			(xy 82.55 40.64) (xy 67.31 40.64)
