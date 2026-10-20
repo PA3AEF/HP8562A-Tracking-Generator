@@ -5,7 +5,6 @@
 **Reference:** 10 MHz from spectrum analyzer  
 **Sweep Source:** Analyzer 1st LO
 
----
 
 ## Overview
 
@@ -25,7 +24,6 @@ The module uses:
 
 The mixer’s difference product reconstructs the analyzer RF at base‑band.
 
----
 
 ## Frequency plan
 
@@ -54,13 +52,11 @@ Mixer output:
 
 Thus the TG output equals the analyzer RF.
 
----
 
 ## Block diagram
 
 ![Base‑Band TG architecture](./images/baseband-architecture.png)
 
----
 
 ## Power budget (nominal)
 
@@ -86,7 +82,6 @@ Thus the TG output equals the analyzer RF.
 | Output pad                     | 0–3 GHz           |  –3 dB  |   0 dBm  |
 | TG output (SMA)                | 0–3 GHz           |   0 dB  |   0 dBm  |
 
----
 
 ## Control architecture
 
@@ -95,7 +90,6 @@ Thus the TG output equals the analyzer RF.
 - LO is fixed; no sweep‑depedent tuning necessary 
 - MCU handles LO enable/mute and lock‑detect
 
----
 
 ## Mechanical / layout notes
 
@@ -108,4 +102,3 @@ Thus the TG output equals the analyzer RF.
   - Final output  
 - 3 GHz LPF ensures suppression of LO feedthrough and mixer images
 
----

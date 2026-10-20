@@ -3,8 +3,6 @@
 This document describes the modular firmware architecture used in the **HP8562A Tracking Generator** project.  
 It complements the system‑level design documents in `/docs/architecture` and focuses on the internal structure, sequencing, and logic of the firmware modules.
 
----
-
 ## 1. Overview
 
 The firmware controls the TG’s mixed‑PLL synthesizer system (MAX2870 + ADF4351), band‑switching logic, and RF routing.  
@@ -17,40 +15,18 @@ It is designed for clarity, reproducibility, and modularity, following a clean s
 - Safe RF transitions (no hot‑switching)  
 - Extensible for future bands or PLL types  
 
----
-
-## 2. Directory Structure
-
-/firmware  
-  src/  
-   • Tracking_Generator.ino
-   • pins.h
-   • bands.h / bands.cpp
-   • pll_max2870.h / pll_max2870.cpp  
-   • pll_adf4351.h / pll_adf4351.cpp    
-   • pll_control.h / pll_control.cpp  
-   • pe42540.h / pe42540.cpp
-   • ramp.h / ramp.cpp  
-   • rotary.h / rotary.cpp  
-   docs/  
-   • firmware_architecture.md  
-
-Each module has a single responsibility and can be tested independently.
-
----
 
 ## 3. Module Responsibilities
+Each module has a single responsibility and can be tested independently.
 
 **pins.h** - Defines all GPIO assignments  
 **bands.cpp** - Implements band table, state machine, and switching logic  
 **pll_max2870.cpp / pll_adf4351.cpp** - Compute register sets for each PLL type  
 **pll_control.cpp** - Holds static default register sets per band  
-**pe42540.cpp** - Controls LO routing switch
+**pe42540.cpp** - Controls LO routing switch  
 **ramp.cpp** - Converts ramp ADC value to LO frequency  
-**rotary.cpp** - Reads Gray‑code band selector  
+**rotary.cpp** - Reads Gray‑code band selector    
 **Tracking_Generator.ino** - Initializes modules and runs the control loop  
-
----
 
 ## 4. Band‑Switching Sequence
 
@@ -75,8 +51,6 @@ The firmware follows an eight‑step, RF‑safe switching sequence:
 
 These diagrams illustrate the relative timing of RF_EN, PLL_CE, LO Switch, and PLL Lock Detect signals.
 
----
-
 ## 5. Safety and Timing Considerations
 
 - RF_EN is always turned off before any LO or PLL transition  
@@ -88,9 +62,6 @@ These diagrams illustrate the relative timing of RF_EN, PLL_CE, LO Switch, and P
   • SPI burst: ~100 µs  
   • Lock wait: 5–10 ms (band‑dependent)  
 
----
-
-
 ## 6. Build and Deployment
 
 - Platform: Raspberry Pi Pico (RP2040)  
@@ -99,13 +70,9 @@ These diagrams illustrate the relative timing of RF_EN, PLL_CE, LO Switch, and P
 - Serial debug: 115200 baud  
 - Upload via USB using Arduino IDE or CLI  
 
----
-
 ## 7. References
 
 - MAX2870 Datasheet  
 - ADF4351 Datasheet  
 - PE42540 Datasheet  
-
----
 

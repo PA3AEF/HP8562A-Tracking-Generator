@@ -10,7 +10,6 @@ It reconstructs the analyzer’s 9.5–11.5 GHz sweep by combining:
 
 All frequencies remain coherent with the analyzer because they are derived from the analyzer’s 1st LO and 10 MHz reference.
 
----
 
 ## Harmonic‑mode coherence
 
@@ -24,7 +23,6 @@ For RF_SA = 9.5–11.5 GHz, this yields:
 
 This is the actual LO range the 3 cm TG module must track.
 
----
 
 ## Why the LO must be doubled
 
@@ -36,7 +34,6 @@ The HMC220 mixer requires:
 The analyzer’s 1st LO (4.905–5.905 GHz) is too low for the HMC220 LO port.  
 Therefore, the TG uses a ×2 multipiler (HMC204): `LO₂ = 2 × LO_SA = 9.81–11.81 GHz`, fitting the mixer’s LO range.
 
----
 
 ## IF_TG generation (ADF4351)
 
@@ -44,7 +41,6 @@ The TG generates a fixed IF signal using the ADF4351: `IF_TG = 310.7 MHz
 The MCU programs the ADF4351 via SPI and maintains sweep coherence with the analyzer’s 10 MHz reference.
 A Band Pass Filter at 310 MHz follows the ADF4351 to maintain signal purity. 
 
----
 
 ## Mixer output and TG coherence
 
@@ -53,7 +49,6 @@ Substituting the ranges:
 LO₂ = 9.81–11.81 GHz, IF_TG = 310.7 MHz → RF_TG = 9.5–11.5 GHz.  
 This exactly matches the analyzer’s displayed frequency.
 
----
 
 ## Module architecture and building blocks
 
@@ -93,7 +88,6 @@ Did not succeed yet in modeling a proper BPF so, for now a simple lowpass filter
 - Maintains linearity across the sweep  
 - Ensures stable 50 Ω output at the TG output SMA connector
 
----
 
 ## Performance targets
 
@@ -117,4 +111,3 @@ Did not succeed yet in modeling a proper BPF so, for now a simple lowpass filter
 - RF layout suitable for >10 GHz  
 - Isolation between LO₂, IF_TG, and RF paths  
 
----

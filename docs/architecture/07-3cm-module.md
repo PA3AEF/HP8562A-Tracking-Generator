@@ -5,7 +5,6 @@
 **TG IF LO:** ADF4351 (fixed 310.7 MHz)  
 **SA LO Path:** Doubled analyzer LO (9.81–11.81 GHz)
 
----
 
 ## Overview
 
@@ -24,7 +23,6 @@ The module uses:
 
 This module forms the primary **X‑band TG path** in the system.
 
----
 
 ## Frequency plan
 
@@ -45,14 +43,12 @@ For RF_SA = 9.5–11.5 GHz:
 
 This is the **actual analyzer LO** delivered to the TG distribution board.
 
----
 
 ### Doubled LO for HMC220 LO port  
 `LO_2 = 2 * LO_SA`  → `9.8107–11.8107 GHz`
 
 This is the **high‑frequency LO** applied to the HMC220 LO port.
 
----
 
 ### TG IF LO (ADF4351)  
 Mixer uses:  
@@ -64,17 +60,14 @@ we require:
 
 Thus the ADF4351 runs at a **fixed 310.7 MHz**, simplifying control and calibration.
 
----
 
 ## Block diagram
 
 ![3cm TG architecture](./images/3cm-architecture.png)
 
-```
-
----
 
 ## Power budget (nominal)
+
 
 | Stage                         | Frequency             | ΔdB     | Level   |
 |-------------------------------|----------------------:|--------:|--------:|
@@ -102,7 +95,6 @@ Thus the ADF4351 runs at a **fixed 310.7 MHz**, simplifying control and calibr
 
 Levels are nominal and must be trimmed with pads and EQ for flatness over the 2 GHz span.
 
----
 
 ## Control architecture
 
@@ -119,7 +111,6 @@ Levels are nominal and must be trimmed with pads and EQ for flatness over the 2�
 - Dedicated CS for ADF4351  
 - PLL lock‑detect GPIO
 
----
 
 ## Calibration notes
 
@@ -128,7 +119,6 @@ Levels are nominal and must be trimmed with pads and EQ for flatness over the 2�
 - ADF4351 spur performance acceptable due to low IF offset  
 - No IF sweep required (fixed 310.7 MHz simplifies calibration)
 
----
 
 ## Mechanical / layout notes
 
@@ -137,4 +127,3 @@ Levels are nominal and must be trimmed with pads and EQ for flatness over the 2�
 - ADF4351 IF routing requires clean 50 Ω but is not microwave‑critical  
 - Fine‑tune pads for correct levels at `LO_2`, `IF_TG`, and `RF_TG`  
 
----

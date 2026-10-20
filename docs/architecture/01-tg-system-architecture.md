@@ -4,7 +4,6 @@
 **Architecture:** Distributed mixer‑based TG with per‑band modules  
 **Control:** Central MCU (Raspberry Pi Pico)
 
----
 
 ## Overview
 
@@ -24,7 +23,6 @@ Two analyzer signals form the foundation:
 
 The TG system uses these to generate all required LOs for each band.
 
----
 
 ## System‑level signal flow
 
@@ -40,7 +38,6 @@ The TG system is composed of six boards:
 The analyzer’s 1st LO enters the system through the **LO Distribution Module**, which conditions and splits it to all TG modules.  
 Each TG module then generates its own internal LO(s) and performs mixing to reconstruct the analyzer RF at its target band.
 
----
 
 ## LO architecture summary
 
@@ -73,14 +70,11 @@ Each TG module then generates its own internal LO(s) and performs mixing to reco
 - Will require higher‑order multiplication  
 - Output expected in 23-25 GHz region
 
----
 
 ## Block diagram
 
 ![TG system architecture](./images/TG-system-architecture.png) 
 
-
----
 
 ## Power distribution & LO levels
 
@@ -94,7 +88,6 @@ Each TG module then generates its own internal LO(s) and performs mixing to reco
 
 All levels are chosen to meet mixer LO drive requirements and maintain isolation.
 
----
 
 ## Control architecture
 
@@ -112,7 +105,6 @@ All levels are chosen to meet mixer LO drive requirements and maintain isolation
 - 10 MHz reference distributed to all PLLs  
 - Optional GPIO for LO mute and module enable
 
----
 
 ## Calibration architecture
 
@@ -129,7 +121,6 @@ System‑level calibration ensures:
 - Flatness across each module’s span  
 - Coherent phase relationship with analyzer LO
 
----
 
 ## Mechanical / layout considerations
 
@@ -140,7 +131,6 @@ System‑level calibration ensures:
 - Consistent grounding across all modules  
 - SMA connectors clearly labeled by band  
 
----
 
 ## Future expansion
 
@@ -154,4 +144,3 @@ The architecture is designed to scale to:
 
 All highly ambitious but no roadblocks in the architecture for possible future developmenst . 
 
----

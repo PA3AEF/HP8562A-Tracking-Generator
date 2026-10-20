@@ -3,7 +3,6 @@
 The LO Module takes the **1st LO output from the HP 8562A/B Spectrum Analyzer** and distributes it cleanly and at controlled power levels to all TG RF modules.  
 The module provides isolation, optionally gain compensation, RF switching, and MCU‑based band selection.
 
----
 
 ## Purpose
 
@@ -14,13 +13,11 @@ The module provides isolation, optionally gain compensation, RF switching, and M
 - Allow **MCU‑controlled band selection** via PE4250/PE42540 RF switches  
 - Deliver **~+16 dBm** per‑port LO drive for mixers in each TG band module
 
----
 
 ## Block Diagram
 
 ![TG system architecture](/hardware/LO-module/lo-module.png)
 
----
 
 ## LO Signal Path
 
@@ -60,7 +57,6 @@ The module provides isolation, optionally gain compensation, RF switching, and M
 - Selects active LO output path  
 - Provides band‑select logic for TG modules
 
----
 
 ## Design Notes
 
@@ -70,7 +66,4 @@ The module provides isolation, optionally gain compensation, RF switching, and M
 - PE42540 chosen for isolation and MCU‑controlled routing  
 - Maintain short RF traces and controlled impedance routing
 
-
-
----
 

@@ -4,7 +4,6 @@
 **Outputs:** Four LO feeds to TG modules  
 **Target Output Level:** +16 dBm per port (→ +13 dBm at mixer LO pins)
 
----
 
 ## Overview
 
@@ -20,7 +19,6 @@ Its responsibilities:
 
 This board forms the **central LO backbone** for the entire TG system.
 
----
 
 ## Frequency & level plan
 
@@ -42,13 +40,11 @@ Each TG module receives:
 - After on‑module pad/filter (~3 dB):  
   → **+13 dBm at mixer LO pin**
 
----
 
 ## Block diagram
 
 ![SA LO distribution architecture](/docs/architecture/images/sa-lo-distribution.png)
 
----
 
 ## Power budget (nominal)
 
@@ -60,7 +56,6 @@ Each TG module receives:
 | TG module LO input | — | +14.5 dBm |
 | On‑module pad/filter | –3 dB | **+11 dBm at mixer LO pin** |
 
----
 
 ## Output ports
 
@@ -78,7 +73,6 @@ Each port includes:
 - 50 ohm matched SMA  
 - +16 dBm nominal output
 
----
 
 ## Mechanical / layout notes
 
@@ -86,7 +80,6 @@ Each port includes:
 - Amplifier and splitter routes short and shielded  
 - Clear labeling for all LO outputs  
 
----
 
 ## Future expansion
 
@@ -97,4 +90,3 @@ Designed to support:
 - Optional per‑branch filtering  
 - LO mute switching thru MCU
 
----

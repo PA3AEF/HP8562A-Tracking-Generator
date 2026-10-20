@@ -70,6 +70,3 @@ Contributions, bug reports, and suggestions are welcome. Please open an issue or
 
 Refer to the repository license file for licensing information.
 
-## Author
-
-PA3AEF

@@ -5,8 +5,6 @@ Detailed schematics and electrical notes are in:
 - **`docs/mcu-hardware.md`**  
 - **`docs/10MHz_reference.md`** (for the reference buffer subsystem)
 
----
-
 ## Purpose
 
 - Provide a stable hardware platform for system control  
@@ -15,8 +13,6 @@ Detailed schematics and electrical notes are in:
 - Provide **SWD** for programming and debugging  
 - Implement power‑good sensing and system‑level monitoring  
 
----
-
 ## Block Diagram
 
 Power In → Protection → Regulators → **Pico 2**  
@@ -24,8 +20,6 @@ Pico 2 → SPI Header → RF Modules
 Pico 2 → USB → Host  
 Pico 2 → SWD → Programming / Debug  
 Pico 2 → Status LEDs
-
----
 
 ## Hardware Interfaces
 
@@ -56,15 +50,13 @@ Pico 2 → Status LEDs
 - Reference‑present LED (from reference buffer module)  
 - Fault LED per module (basically Lock-Detect) driven by Pico 2  
 
----
-
 ## Design Notes (Hardware)
 
 - **Noise isolation:**  
-  Pico 2 digital switching kept physically separated from the 10 MHz reference path; ground stitching and ferrites reduce coupling.
+  Pico 2 digital switching kept physically separated from the 10 MHz reference path; ground stitching and ferrite reduce coupling.
 
 - **Signal integrity:**  
-  SPI traces length‑matched; series damping resistors on high‑speed lines.
+  SPI traces are short, series damping resistors on high‑speed lines.
 
 - **Protection:**  
   TVS diodes on USB, ESD diodes on GPIO headers, reverse‑polarity MOSFET on power input.
@@ -73,7 +65,6 @@ Pico 2 → Status LEDs
   USB connector and SWD header placed at board edge for easy access.
 
 
----
 
 ## Connector Summary
 
@@ -81,6 +72,6 @@ Pico 2 → Status LEDs
 - **USB:** USB‑C or Micro‑USB (data only)  
 - **SWD:** 3‑ or 4‑pin programming header  
 - **Power Input:** Screw terminal or pin-header  
-- **Status LEDs:** Power, Reference, Fault (No Lock)  
+- **Status LEDs:** Power, Reference, Fault (No Lock)
+- **RF power:** Power to RF circuitry per module  
 
----

@@ -1,8 +1,10 @@
 # Tracking Generator for the HP 8562A/B Spectrum Analyzer  
-**Reconstructing the Analyzer’s RF Sweep from Its Local Oscillator**
+**Reconstructing the Analyzer’s RF Sweep from Its Local Oscillator**  
 **A modular, analyzer‑synchronous architecture**
 
----
+PA3AEF 2026 
+
+
 
 ## What this project is
 
@@ -18,8 +20,6 @@ It reconstructs the analyzer’s RF sweep using only:
 
 The TG becomes a slave to the analyzer’s LO system and rebuilds the RF sweep in real time across multiple microwave bands.
 
----
-
 ## Why build a Tracking Generator for the HP 8562A/B?
 
 The HP 8562A/B is a legendary instrument: fast, sensitive, and extremely stable.  
@@ -33,7 +33,6 @@ But without a tracking generator, it cannot perform:
 
 This project fills that gap with a TG that follows the analyzer sweep exactly, using the analyzer’s own LO architecture.
 
----
 
 ## How the analyzer sweeps — and how the TG reconstructs the RF
 
@@ -55,7 +54,6 @@ Because **n changes with band**, the analyzer LO becomes **non‑linear** with r
 
 A tracking generator must compensate for this non‑linearity to stay aligned.
 
----
 
 ## How the TG reconstructs the analyzer RF
 
@@ -87,7 +85,6 @@ This yields:
 This architecture reqires **no swept PLLs** in the microwave TG modules.  
 Sweep coherence comes entirely from the analyzer LO.
 
----
 
 ## High‑level TG architecture
 
@@ -121,8 +118,6 @@ Analyzer → V_sweep → MCU → Harmonic modules
 
 Each TG module reconstructs the analyzer RF at its own band using a mixer‑based architecture.
 
----
-
 ## TG coverage limits
 
 - **Implemented TG bands:**  
@@ -137,7 +132,6 @@ Each TG module reconstructs the analyzer RF at its own band using a mixer‑base
   - Up to 26 GHz with Option 026  
   - TG coverage currently ends at 11.5 GHz
 
----
 
 ## Repository structure
 
@@ -165,8 +159,6 @@ Each TG module reconstructs the analyzer RF at its own band using a mixer‑base
     calibration and measurement tools
 ```
 
----
-
 ## Status (Oct 19, 2026)
 
 Checkout the [discussion section](https://github.com/PA3AEF/HP8562A-Tracking-Generator/discussions) for updates on the first results I have. 
@@ -180,8 +172,6 @@ Checkout the [discussion section](https://github.com/PA3AEF/HP8562A-Tracking-Gen
 - 3 cm module: proof of concept tested OK (tracking at 10 GHz with 2 GHz span)  
 - 6 cm module: architecture defined  
 - 12 mm module: conceptual design complete  
-
----
 
 ## License
 

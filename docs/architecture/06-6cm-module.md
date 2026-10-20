@@ -63,13 +63,11 @@ Since `LO_SA = RF_SA + 310.7 MHz`, we require: `IF_TG = 310.7 MHz` (constant)
 
 Thus the ADF4351 runs at a **fixed 310.7 MHz**, simplifying control and calibration.
 
----
 
 ## Block diagram
 
 ![6cm TG architecture](./images/6cm-architecture.png)
 
----
 
 ## Power budget (nominal)
 
@@ -97,7 +95,6 @@ Thus the ADF4351 runs at a **fixed 310.7 MHz**, simplifying control and calibr
 
 Levels are nominal and must be trimmd with pads and EQ for flatness over the 2 GHz span.
 
----
 
 ## Control architecture
 
@@ -114,7 +111,6 @@ Levels are nominal and must be trimmd with pads and EQ for flatness over the 2�
 - Dedicated CS for ADF4351  
 - PLL lock‑detect GPIO
 
----
 
 ## Calibration notes
 
@@ -123,7 +119,6 @@ Levels are nominal and must be trimmd with pads and EQ for flatness over the 2�
 - ADF4351 spur performance acceptable due to low IF offset  
 - No IF sweep required (fixed 310.7 MHz simplifies calibration)
 
----
 
 ## Mechanical / layout notes
 
@@ -132,4 +127,3 @@ Levels are nominal and must be trimmd with pads and EQ for flatness over the 2�
 - ADF4351 IF routing requires clean 50 Ω but is not microwave‑critical  
 - Fine‑tune pads for correct levels at `LO_SA`, `IF_TG`, and `RF_TG`  
 
----

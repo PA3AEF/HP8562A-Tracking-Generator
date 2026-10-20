@@ -66,9 +66,7 @@ Each block is described below.
 - LO port: LO_TG (~13 dBm)  
 - IF/RF output: 0–2.9 GHz TG signal  
 - Requires good grounding and shielding to minimize LO feedthrough.  
-- Ready‑made boxed modules very much simplify construction.
-
----
+- Ready‑made boxed modules very much simplify construction.\
 
 ### Low‑Pass Filter (DC–3 GHz)
 - Removes mixer images and LO leakage.  
@@ -84,8 +82,6 @@ Each block is described below.
 Another solution was modeled using folded stepped impedance open subs after Makki et al. 
 
 ![Low Pass Filter with Fc 3 GHz on Microstrip](/hardware/baseband-module/images/lpf-3GHz-SIOS.png)
-
----
 
 ## Performance Goals
 
@@ -108,8 +104,6 @@ Another solution was modeled using folded stepped impedance open subs after Makk
 ### Implementation Notes
 - RF‑clean routing up to 3 GHz  
 - Strong isolation between LO_TG and RF paths  
-
----
 
 ## Summary
 

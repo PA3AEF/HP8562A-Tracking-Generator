@@ -12,8 +12,6 @@ The hardware is organized into four primary modules:
 
 All PCBs are designed in KiCad and stored in separate subdirectories.
 
----
-
 ## Directory Structure
 
 Each module directory contains:
@@ -22,8 +20,6 @@ Each module directory contains:
 - **`pcb/`** — KiCad PCB files, 3D views, fabrication output  
 - **`bom.csv`** — Bill of Materials  
 - **`readme.md`** — module‑specific documentation (gain budget, design notes, test plan)
-
----
 
 ## Hardware Module Overview
 
@@ -60,7 +56,6 @@ Each module directory contains:
 - Braodband amplification of 1st LO output
 - Distribution of 1st LO to band modules 
 
----
 
 ## Design Principles
 
@@ -69,7 +64,5 @@ Each module directory contains:
 - **Reproducible:** BOMs, schematics, and PCB files are fully documented  
 - **RF‑optimized:** short signal paths, solid grounding, controlled impedance  
 - **Measurable:** each module includes clear test points and a documented gain budget
-
----
 
 

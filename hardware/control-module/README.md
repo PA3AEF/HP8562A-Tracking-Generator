@@ -2,7 +2,6 @@
 
 Compact hardware overview for the Control Module: power sequencing, protection, MCU host interfaces, and the low‑noise 10 MHz reference buffering and 1:4 distribution. Detailed hardware-level descriptions for the **10 MHz reference** and **MCU** are in separate documents (`docs/10MHz_reference.md`, `docs/mcu-hardware.md`). Firmware is covered elsewhere.
 
----
 
 ## Purpose
 
@@ -11,7 +10,6 @@ Compact hardware overview for the Control Module: power sequencing, protection, 
 - Protect and condition reference and power inputs (ESD, TVS, reverse polarity)  
 - Present SPI/UART/USB headers and status indicators for system integration
 
----
 
 ## Block Diagram
 
@@ -19,7 +17,6 @@ Compact hardware overview for the Control Module: power sequencing, protection, 
 Power In → Sequencing & Regulators → MCU + Peripherals  
 MCU headers: SPI, UART, VRef, Switch, RF-Modules
 
----
 
 ## Hardware Interfaces
 
@@ -38,7 +35,6 @@ MCU headers: SPI, UART, VRef, Switch, RF-Modules
 - **Indicators**
   - Power, module-select and lock detect fault LEDs at PCB headers
 
----
 
 ## Design Notes (Hardware Only)
 
@@ -49,7 +45,6 @@ MCU headers: SPI, UART, VRef, Switch, RF-Modules
 - **EMC:** ferrite beads, common‑mode chokes, and local decoupling to reduce digital noise coupling into 10 MHz path.  
 - **Test points:** RF amplitude, buffer bias, and power‑good nets exposed for bench verification.
 
----
 
 ## Connector / Pin Summary
 
@@ -62,15 +57,9 @@ MCU headers: SPI, UART, VRef, Switch, RF-Modules
 - **LO Switch:** 3-pin header
 - **RF Modules:** 3-pin and 2-pin headers 
 
----
-
-
 ## Control Module
  
 ![Control Module populated PCB](control-module.png)
-
-
----
 
 ## Documentation
 
@@ -78,5 +67,3 @@ Hardware detail references:
 - **`10MHz_reference.md`** — full schematic, BOM, and RF measurements  
 - **`mcu-hardware.md`** — MCU pinout, power sequencing, and debug connectors  
 - **`control-module`** — mechanical drawings and test fixtures
-
----

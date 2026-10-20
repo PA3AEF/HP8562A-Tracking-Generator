@@ -4,7 +4,6 @@
 **Distribution:** Central RF SA‑LO Distribution module 
 **Modes:** Fundamental mixing (Base‑Band), 2× harmonic mixing (3 cm), future bands
 
----
 
 ## Overview
 
@@ -23,7 +22,6 @@ The TG system uses these to generate:
 
 All TG moduls remain phase‑coherent with the analyzer because every LO path ultimately derives from the analyzer’s 1st LO and 10 MHz reference.
 
----
 
 ## LO sources
 
@@ -44,7 +42,6 @@ All TG moduls remain phase‑coherent with the analyzer because every LO pat
 - Defines the TG output frequency for all modules  
 - For detailed internal LO generation, see **Analyzer LO Internals (3 cm Band)**
 
----
 
 ## LO distribution
 
@@ -61,7 +58,6 @@ Each TG module receives:
 
 This ensures consistent LO drive for all mixers (HMC219, HMC220, future devices).
 
----
 
 # How the analyzer generates LO_SA in the 3 cm band
 
@@ -90,7 +86,6 @@ Because the TG derives all of its internal LOs from:
 
 every TG output is inherently phase‑coherent with the analyzer’s sweep.
 
----
 
 # Harmonic‑mode coherence between analyzer and TG
 
@@ -111,7 +106,6 @@ The TG then:
 
 This ensures that the 3 cm TG output is coherent with the analyzer’s displayed frequency.
 
----
 
 ## LO usage per module
 
@@ -142,7 +136,6 @@ This ensures that the 3 cm TG output is coherent with the�
   - High‑frequency gain blocks  
   - Tight shielding and isolation
 
----
 
 ## Reference Selection: 10 MHz vs. 300 MHz
 
@@ -162,7 +155,6 @@ For the TG architecture, the **10 MHz reference is preferred**.
 Therfore, all TG PLLs use the analyzer’s **10 MHz TCXO** as their reference.  
 It is cleaner, simpler, and guarantees long‑term coherence with the analyzer’s LO system.
 
----
 
 ## Power budget (Generic)
 
@@ -177,7 +169,6 @@ It is cleaner, simpler, and guarantees long‑term coherence with the analyzer�
 
 Levels may vary slightly per module but remain withjin mixer LO drive requirements.
 
----
 
 ## Control architecture
 
@@ -193,7 +184,6 @@ Levels may vary slightly per module but remain withjin mixer LO drive requiremen
   - Sweep‑dependent IF calculations (Base‑Band only)  
   - Band selection
 
----
 
 ## Mechanical / layout notes
 
@@ -201,7 +191,6 @@ Levels may vary slightly per module but remain withjin mixer LO drive requiremen
 - High isolation between LO paths and TG RF outputs    
 - Consistent grounding across all TG modules  
 
----
 
 ## Future expansion
 
@@ -215,4 +204,3 @@ The LO architecture is designed to scale to:
 
 The analyzer’s 1st LO and 10 MHz reference remain the single point of coherence for the entire TG system.
 
----

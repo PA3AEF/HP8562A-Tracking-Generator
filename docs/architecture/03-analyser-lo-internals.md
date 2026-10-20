@@ -1,7 +1,6 @@
 # Analyzer LO Internals (3 cm Band)  
 **Purpose:** Explain how the HP 8562A/B analyzer generates the 4.905–5.905 GHz 1st LO range used by the Tracking Generator.
 
----
 
 ## Overview
 
@@ -19,7 +18,6 @@ This LO_SA range is derived from the harmonic‑mode equation:
 
 The analyzer uses the **high‑side** solution: **LO_SA = (RF_SA + 310.7 MHz) / 2**
 
----
 
 ## Internal signal flow
 
@@ -35,7 +33,6 @@ So according to the HP service manual:
 > A Dual Mixer down‑converts the RF input to a first IF of 310.7 MHz…  
 > The second and final conversion occurs in the third converter… producing the final 10.7 MHz IF.”
 
----
 
 ## Frequency relationships
 
@@ -57,7 +54,6 @@ Thus the analyzer’s synthesizer output (LO_SA) runs from:
 
 This is the LO range distributed to the TG.
 
----
 
 ## Summary table
 
@@ -69,7 +65,6 @@ This is the LO range distributed to the TG.
 | Effective 1st LO | **LO_2** | 9.81–11.81 GHz | 2 × LO_SA |
 | Final IF | **IF_display** | 10.7 MHz | Display IF |
 
----
 
 ## Integration with TG
 
@@ -84,4 +79,3 @@ The TG uses this LO_SA range to maintain coherence:
 
 This ensures perfect frequency tracking between analyzer and TG.
 
----
