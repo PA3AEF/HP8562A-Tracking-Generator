@@ -79,6 +79,7 @@ Each TG module then generates its own internal LO(s) and performs mixing to reco
 
 ![TG system architecture](./images/tg-system-architecture.png) 
 
+
 ---
 
 ## Power distribution & LO levels
